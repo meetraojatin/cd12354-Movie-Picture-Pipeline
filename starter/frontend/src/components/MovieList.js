@@ -6,9 +6,11 @@ function MovieList({ onMovieClick }) {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    axios.get('http://af7405712e70b4410b0382a8c5d02d95-1598426126.us-east-1.elb.amazonaws.com/movies').then((response) => {
-      setMovies(response.data.movies);
-    });
+    axios.get('http://af7405712e70b4410b0382a8c5d02d95-1598426126.us-east-1.elb.amazonaws.com/movies')
+      .then((response) => {
+        setMovies(response.data.movies || []);
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   return (
