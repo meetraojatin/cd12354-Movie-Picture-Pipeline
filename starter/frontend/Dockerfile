@@ -2,6 +2,7 @@ FROM public.ecr.aws/docker/library/node:18.14.2-alpine3.17
 
 WORKDIR /app
 
+
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm ci
