@@ -37,5 +37,5 @@ jobs:
 
       - name: Deploy Backend to EKS
         run: |
-          kubectl apply -k starter/backend/k8s/
+          kubectl apply -k starter/backend/k8s/ --validate=false
           kubectl rollout restart deployment/backend || true

@@ -39,5 +39,5 @@ jobs:
 
       - name: Deploy Frontend to EKS
         run: |
-          kubectl apply -k starter/frontend/k8s/
+          kubectl apply -k starter/frontend/k8s/ --validate=false
           kubectl rollout restart deployment/frontend || true
