@@ -20,11 +20,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: Build & Push Frontend Image
-        run: |
-          cd starter/frontend
-          docker build -t ${{ secrets.ECR_FRONTEND_REPO }}:latest .
-          docker push ${{ secrets.ECR_FRONTEND_REPO }}:latest
+        run: docker build -t ${{ secrets.ECR_FRONTEND_REPO }}:latest ./starter/frontend && docker push ${{ secrets.ECR_FRONTEND_REPO }}:latest
       - name: Deploy Frontend to EKS
-        run: |
-          aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
-          kubectl apply -k starter/frontend/k8s/
+        run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }} && kubectl apply -k starter/frontend/k8s/
