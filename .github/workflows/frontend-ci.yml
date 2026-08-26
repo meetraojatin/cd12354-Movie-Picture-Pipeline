@@ -1,4 +1,3 @@
-cat << 'EOF' > .github/workflows/frontend-ci.yml
 name: Frontend CI
 
 on:
@@ -16,8 +15,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      - name: Install & Test Frontend
+      - name: Install Frontend
         run: |
           cd starter/frontend
           npm install
-EOF

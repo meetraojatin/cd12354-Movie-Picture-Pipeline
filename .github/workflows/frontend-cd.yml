@@ -1,4 +1,3 @@
-cat << 'EOF' > .github/workflows/frontend-cd.yml
 name: Frontend CD
 
 on:
@@ -29,4 +28,3 @@ jobs:
         run: |
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
           kubectl apply -k starter/frontend/k8s/
-EOF
