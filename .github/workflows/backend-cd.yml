@@ -10,16 +10,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Log in to ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
       - name: Build & Push Backend Image
-        run: docker build -t ${{ secrets.ECR_BACKEND_REPO }}:latest ./starter/backend && docker push ${{ secrets.ECR_BACKEND_REPO }}:latest
+        run: |
+          cd starter/backend
+          docker build -t ${{ secrets.ECR_BACKEND_REPO }}:latest .
+          docker push ${{ secrets.ECR_BACKEND_REPO }}:latest
+
       - name: Deploy Backend to EKS
-        run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }} && kubectl apply -k starter/backend/k8s/
+        run: |
+          aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
+          kubectl apply -k starter/backend/k8s/
