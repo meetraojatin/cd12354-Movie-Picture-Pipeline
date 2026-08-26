@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MovieList from './components/MovieList';
-import MovieDetail from './components/MovieDetail'; // Updated to singular to match the component file
+import MovieDetails from './components/MovieDetails';
 import './App.css';
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
 
       <div style={styles.mainContent}>
         <h2>Movie Details</h2>
-        <MovieDetail movie={selectedMovie} />
+        <MovieDetails movie={selectedMovie} />
       </div>
     </div>
   );
