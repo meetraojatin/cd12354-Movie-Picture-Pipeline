@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MovieList from './components/MovieList';
-import MovieDetails from './components/MovieDetails';
+import MovieDetail from './components/MovieDetail'; // Updated to singular to match the component file
 import './App.css';
 
 export default function App() {
@@ -11,17 +11,34 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Movie List</h1>
+    <div className="container" style={styles.appContainer}>
+      <div style={styles.sidebar}>
+        <h2>Movie List</h2>
+        <MovieList onMovieClick={handleMovieClick} />
+      </div>
 
-      <MovieList onMovieClick={handleMovieClick} />
-
-      {selectedMovie && (
-        <>
-          <h1>Movie Details</h1>
-          <MovieDetails movie={selectedMovie} />
-        </>
-      )}
+      <div style={styles.mainContent}>
+        <h2>Movie Details</h2>
+        <MovieDetail movie={selectedMovie} />
+      </div>
     </div>
   );
 }
+
+const styles = {
+  appContainer: {
+    display: 'flex',
+    gap: '32px',
+    padding: '24px',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    fontFamily: 'sans-serif'
+  },
+  sidebar: {
+    flex: '1',
+    minWidth: '250px'
+  },
+  mainContent: {
+    flex: '2'
+  }
+};
