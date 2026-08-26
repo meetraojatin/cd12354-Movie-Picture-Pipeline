@@ -1,0 +1,23 @@
+cat << 'EOF' > .github/workflows/frontend-ci.yml
+name: Frontend CI
+
+on:
+  push:
+    paths:
+      - 'starter/frontend/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install & Test Frontend
+        run: |
+          cd starter/frontend
+          npm install
+EOF
