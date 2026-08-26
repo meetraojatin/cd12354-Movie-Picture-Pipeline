@@ -31,4 +31,4 @@ jobs:
       - name: Deploy Frontend to EKS
         run: |
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
-          kubectl apply -k k8s/
+          kubectl apply -k starter/frontend/k8s/
